@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedido recebido — Pudinzin da Vivi</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#3b1f10">
+<link rel="stylesheet" href="style.css">
+<style>
+body{background:var(--cacau);color:var(--creme);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 18px}
+.box{width:100%;max-width:520px;background:var(--creme);color:var(--cacau);border-radius:26px;padding:34px 28px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.box .logo{width:150px;margin:0 auto 22px}
+.icone{width:76px;height:76px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:36px;color:var(--creme);background:var(--marrom)}
+.icone.ok{background:#1f7a46}
+h1{font-size:30px;color:var(--marrom);margin-bottom:8px}
+p{margin:0 0 6px;color:var(--suave)}
+.resumo{background:var(--areia);border-radius:16px;padding:16px 18px;margin:22px 0;text-align:left;font-size:15px}
+.resumo div{display:flex;justify-content:space-between;gap:10px;padding:3px 0}
+.resumo b{color:var(--cacau)}
+.btn{width:100%}
+.passo-final{font-weight:700;color:#1f7a46;margin:4px 0 6px;font-size:17px}
+#info-data{margin:0 0 18px}
+.btn-whats{background:transparent;color:#1f7a46;border:2px solid #1f7a46;padding:14px 20px;font-size:15px}
+.pequeno{font-size:13px;margin-top:16px}
+.slogan{width:120px;margin:26px auto 0;opacity:.95}
+</style>
+</head>
+<body>
+<div class="box">
+  <img class="logo" src="assets/logo-marrom.png" alt="Pudinzin da Vivi">
+  <div class="icone" id="icone">⏳</div>
+  <h1 id="titulo">Conferindo seu pagamento…</h1>
+  <p id="sub">Só um instante.</p>
+  <div class="resumo" id="resumo" hidden></div>
+  <p class="passo-final" id="passo" hidden>✓ Seu pedido já foi enviado para a Vivi.</p>
+  <p id="info-data" hidden></p>
+  <a class="btn btn-whats" id="whats" href="#" target="_blank" rel="noopener" hidden>Falar com a Vivi no WhatsApp</a>
+  <p class="pequeno" id="obs-final"></p>
+  <img class="slogan" src="assets/slogan-original.png" alt="O melhor pudinzin do mundo!">
+</div>
+
+<script src="config.js"></script>
+<script>
+(function () {
+  var C = window.PUDINZIN;
+  var $ = function (id) { return document.getElementById(id); };
+  var brl = function (v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); };
+  var q = new URLSearchParams(location.search);
+  var nsu = q.get('order_nsu') || (function () { try { return localStorage.getItem('pv-ultimo'); } catch (e) { return null; } })();
+  var pedido = null;
+  try { pedido = JSON.parse(localStorage.getItem('pv-pedido-' + nsu) || 'null'); } catch (e) {}
+  var comprovante = q.get('receipt_url') || '';
+
+  function enviarParaVivi(texto) {
+    var chave = 'pv-avisado-' + (nsu || 'sem-numero');
+    if (C.PLANILHA_URL) {
+      // A planilha confere o pagamento com a InfinitePay e avisa a Vivi
+      try {
+        if (!localStorage.getItem(chave) && q.get('slug')) {
+          fetch(C.PLANILHA_URL, { method: 'POST', mode: 'no-cors', keepalive: true,
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ acao: 'pago', pedido: nsu, slug: q.get('slug'),
+              transaction_nsu: q.get('transaction_nsu') || '', receipt_url: comprovante }) }).catch(function () {});
+          localStorage.setItem(chave, '1');
+        }
+      } catch (e) {}
+      return true;
+    }
+    try { if (localStorage.getItem(chave)) return true; } catch (e) {}
+    if (!C.CALLMEBOT_APIKEY) return false;
+    var url = 'https://api.callmebot.com/whatsapp.php?phone=%2B' + C.WHATSAPP +
+      '&apikey=' + encodeURIComponent(C.CALLMEBOT_APIKEY) + '&text=' + encodeURIComponent(texto);
+    try { fetch(url, { mode: 'no-cors', keepalive: true }); } catch (e) { new Image().src = url; }
+    try { localStorage.setItem(chave, '1'); } catch (e) {}
+    return true;
+  }
+
+  function montar(status) {
+    var linhas = [], resumoHtml = '', e = null;
+    linhas.push('🍮 *NOVO PEDIDO DE NATAL*');
+    linhas.push('');
+    linhas.push('*Pedido:* ' + (nsu || '—'));
+    if (pedido) {
+      C.PRODUTOS.forEach(function (p) {
+        var n = pedido.quantidades[p.id];
+        if (n) { linhas.push('• ' + n + 'x ' + p.nome); resumoHtml += '<div><span>' + n + 'x ' + p.nome + '</span><b>' + brl(n * p.preco) + '</b></div>'; }
+      });
+      e = C.ENTREGAS.find(function (x) { return x.id === pedido.entrega; });
+      if (e) {
+        linhas.push('*' + (e.precisaEndereco ? 'Entrega' : 'Retirada') + ':* ' + e.nome + ', ' + e.data + (e.preco ? ' (' + brl(e.preco) + ')' : ''));
+        resumoHtml += '<div><span>' + e.nome + '<br><small style="color:var(--suave)">' + e.data + '</small></span><b>' + (e.preco ? brl(e.preco) : 'Grátis') + '</b></div>';
+      }
+      if (pedido.cliente && pedido.cliente.embalagem) {
+        var nPud = 0; C.PRODUTOS.forEach(function (p) { nPud += pedido.quantidades[p.id] || 0; });
+        linhas.push('• ' + nPud + 'x ' + C.PRESENTE.embalagemNome);
+        resumoHtml += '<div><span>' + nPud + 'x ' + C.PRESENTE.embalagemNome + '</span><b>' + brl(nPud * C.PRESENTE.embalagemPreco) + '</b></div>';
+      }
+      linhas.push('*Total:* ' + brl(pedido.totalPix));
+      resumoHtml += '<div style="border-top:1px solid var(--linha);margin-top:6px;padding-top:8px"><span>Total</span><b>' + brl(pedido.totalPix) + '</b></div>';
+    }
+    linhas.push('*Pagamento:* ' + status);
+    if (comprovante) linhas.push('*Comprovante:* ' + comprovante);
+    if (pedido) {
+      var c = pedido.cliente;
+      linhas.push('');
+      linhas.push('*Cliente:* ' + c.nome);
+      linhas.push('*WhatsApp:* ' + c.telefone + ' (wa.me/55' + c.telefone.replace(/\D/g, '').replace(/^55/, '') + ')');
+      if (c.endereco) linhas.push('*Endereço:* ' + [c.endereco, c.complemento, c.bairro, c.cidade].filter(Boolean).join(', '));
+      if (c.presente) {
+        linhas.push('*Presente:* sim' + (c.embalagem ? ' (kit presente: caixa + laço + cartão)' : '') + (c.destinatario ? ' — para ' + c.destinatario : ''));
+        if (c.mensagem) linhas.push('*Mensagem do cartão:* ' + c.mensagem);
+      }
+      if (c.obs) linhas.push('*Observações:* ' + c.obs);
+    }
+    if (resumoHtml) { $('resumo').innerHTML = resumoHtml; $('resumo').hidden = false; }
+    var enviado = enviarParaVivi(linhas.join('\n'));
+    if (enviado) {
+      $('passo').hidden = false;
+      if (e) {
+        $('info-data').textContent = e.precisaEndereco
+          ? 'Sua entrega será na ' + e.data + '.'
+          : 'Sua retirada será na ' + e.data + '. A Vivi vai te mandar o endereço pelo WhatsApp.';
+        $('info-data').hidden = false;
+      }
+      $('whats').href = 'https://wa.me/' + C.WHATSAPP + '?text=' + encodeURIComponent('Oi, Vivi! Tenho uma dúvida sobre o meu pedido ' + (nsu || '') + ' 🍮');
+    } else {
+      $('passo').textContent = 'Último passo: envie seu pedido para a Vivi 👇';
+      $('passo').style.color = 'var(--cacau)'; $('passo').hidden = false;
+      $('whats').textContent = 'Enviar pedido no WhatsApp';
+      $('whats').href = 'https://wa.me/' + C.WHATSAPP + '?text=' + encodeURIComponent(linhas.join('\n'));
+    }
+    $('whats').hidden = false;
+  }
+
+  function metodoTexto(r) {
+    if (r.metodo === 'pix') return 'Pix ✅ confirmado';
+    if (r.metodo === 'credit_card') return 'Cartão ' + (r.parcelas > 1 ? 'em ' + r.parcelas + 'x' : 'à vista') + ' ✅ confirmado';
+    return 'confirmado ✅';
+  }
+
+  if (!q.get('slug') || !nsu) {
+    $('icone').textContent = '🤎';
+    $('titulo').textContent = 'Pedido recebido!';
+    $('sub').textContent = 'Envie os detalhes para a Vivi confirmar.';
+    montar('a confirmar');
+    return;
+  }
+
+  var CHECK = ['https://api.checkout.infinitepay.io/payment_check', 'https://api.infinitepay.io/invoices/public/checkout/payment_check'];
+  function verificar(i) {
+    return fetch(CHECK[i], {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ handle: C.INFINITETAG.replace(/^\$/, ''), order_nsu: nsu, transaction_nsu: q.get('transaction_nsu') || '', slug: q.get('slug') })
+    }).then(function (r) {
+      if (r.status === 404 && i + 1 < CHECK.length) return verificar(i + 1);
+      return r.json();
+    }, function (e) { if (i + 1 < CHECK.length) return verificar(i + 1); throw e; });
+  }
+  verificar(0).then(function (d) {
+    var r = { pago: d.paid === true, metodo: d.capture_method || q.get('capture_method') || '', parcelas: d.installments || 1, valorPago: d.paid_amount ? d.paid_amount / 100 : null };
+    if (r.pago && pedido && r.valorPago !== null && r.valorPago + 0.01 < pedido.totalPix) r.divergente = true;
+    if (r.pago) {
+      $('icone').textContent = '✓'; $('icone').classList.add('ok');
+      $('titulo').textContent = 'Pagamento aprovado!';
+      $('sub').textContent = 'Obrigada pelo carinho 🤎 Seu pudinzin de Natal está garantido.';
+      montar(metodoTexto(r) + (r.divergente ? ' ⚠️ valor pago (' + brl(r.valorPago) + ') diferente do pedido' : ''));
+    } else {
+      $('icone').textContent = '⏳';
+      $('titulo').textContent = 'Pagamento em análise';
+      $('sub').textContent = 'Ainda não recebemos a confirmação. Envie o pedido para a Vivi que ela confere para você.';
+      montar('aguardando confirmação');
+    }
+  }).catch(function () {
+    $('icone').textContent = '🤎';
+    $('titulo').textContent = 'Pedido recebido!';
+    $('sub').textContent = 'Envie os detalhes para a Vivi conferir o pagamento.';
+    montar('a conferir' + (q.get('capture_method') === 'pix' ? ' (Pix)' : q.get('capture_method') === 'credit_card' ? ' (cartão)' : ''));
+  });
+})();
+</script>
+</body>
+</html>

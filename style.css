@@ -1,0 +1,26 @@
+@font-face{font-family:"Playfair Display";font-weight:600;font-display:swap;src:url(fonts/playfair-display-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Playfair Display";font-weight:700;font-display:swap;src:url(fonts/playfair-display-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Playfair Display";font-weight:400;font-style:italic;font-display:swap;src:url(fonts/playfair-display-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"DM Sans";font-weight:400;font-display:swap;src:url(fonts/dm-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;font-display:swap;src:url(fonts/dm-sans-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"DM Sans";font-weight:700;font-display:swap;src:url(fonts/dm-sans-latin-700-normal.woff2) format("woff2")}
+
+:root{--marrom:#854524;--bege:#cca479;--cacau:#3b1f10;--creme:#fbf6ee;--areia:#f3e7d6;--calda-esc:#8a4a17;--morango:#a8192e;--suave:#6e4b36;--linha:#e6d5be;--bege-claro:#d9c2a6;
+--t:"Playfair Display",Georgia,serif;--s:"DM Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--creme);color:var(--cacau);font-family:var(--s);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.kicker{font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.pill{display:inline-block;white-space:nowrap;font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 16px/1 var(--s);padding:18px 28px;border-radius:999px;border:0;cursor:pointer;text-decoration:none;transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.06)}
+.btn:active{transform:scale(.98)}
+.btn:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--bege);outline-offset:3px}
+.btn-marrom{background:var(--marrom);color:var(--creme)}
+.btn-bege{background:var(--bege);color:var(--cacau)}
+.btn-whats{background:#1f7a46;color:#fff}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+h1,h2,h3{font-family:var(--t);margin:0}

@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pudinzin da Vivi — Encomendas de Natal</title>
+<meta name="description" content="Pudins artesanais para o seu Natal. Tradicional e Chocolate Branco com Morango. Pedidos até 15/12. Pix ou cartão em até 3x.">
+<!-- PRÉVIA DO LINK (WhatsApp/Instagram) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pudinzindavivi.github.io/pudinzin/">
+<meta property="og:title" content="Pudinzin da Vivi — Encomendas de Natal 🎄">
+<meta property="og:description" content="Pudins artesanais de 1 kg: Tradicional e Chocolate Branco com Geleia de Morango. Pedidos até 15/12. Pix ou cartão.">
+<meta property="og:image" content="https://pudinzindavivi.github.io/pudinzin/assets/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#3b1f10">
+<link rel="stylesheet" href="style.css">
+<style>
+/* HERO */
+.hero{background:var(--cacau);color:var(--creme);position:relative;overflow:hidden;text-align:center}
+.hero .wrap{padding-top:140px;padding-bottom:64px;display:flex;flex-direction:column;align-items:center}
+.hero .logo-grande{width:min(300px,64vw);margin:0 auto}
+.hero .kicker{color:var(--bege);margin-top:22px;font-size:13px}
+.hero p{color:var(--bege-claro);font-size:18px;max-width:440px;margin:14px auto 0}
+.hero .prazo{margin-top:14px;font-size:14px;color:var(--bege-claro)}
+.hero .prazo b{color:var(--creme)}
+.hero-foto{width:100%;max-width:440px;margin:36px auto 0;aspect-ratio:4/5;border-radius:28px;background:url(assets/tradicional-plantas.jpg) center 60%/cover;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.estrela{position:absolute;fill:var(--bege);opacity:.9}
+/* NATAL */
+.azevinho{display:block;margin:0 auto 10px;width:46px;height:26px}
+.guirlanda{position:absolute;left:0;right:0;top:-6px;height:150px;background:url(assets/guirlanda.png) center top/auto 150px repeat-x;pointer-events:none;z-index:3}
+.bokeh{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bokeh i{position:absolute;border-radius:50%;filter:blur(14px);opacity:.28}
+.cena{position:relative;width:100%;max-width:780px;margin:36px auto 0;display:flex;justify-content:center;align-items:flex-end}
+.cena .hero-foto{margin:0;position:relative;z-index:1}
+.hero .wrap{position:relative;z-index:1}
+.cena{position:relative;width:100%;max-width:720px;margin:36px auto 0;display:flex;justify-content:center;align-items:flex-end}
+.cena .hero-foto{margin:0;position:relative;z-index:1}
+.feliz-natal{font-family:var(--t);font-style:italic;font-size:22px;color:var(--bege);margin:0 0 22px}
+/* PRODUTOS */
+section{padding:72px 0}
+.titulo-sec{text-align:center;margin-bottom:40px}
+.titulo-sec .kicker{color:var(--marrom)}
+.titulo-sec h2{font-size:clamp(30px,4vw,42px);color:var(--marrom);margin-top:8px}
+.produtos{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:900px;margin:0 auto}
+.card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 10px 30px rgba(59,31,16,.10);display:flex;flex-direction:row;align-items:center}
+.card .metade{flex:0 0 160px;width:160px;height:320px;background-size:160px 320px;background-repeat:no-repeat;align-self:center}
+.card .corpo{padding:20px 18px 20px 22px;display:flex;flex-direction:column;flex:1;min-width:0;align-self:stretch}
+.card .tamanho{font-size:13px;font-weight:700;color:var(--marrom);margin:0 0 12px}
+.card h3{font-size:19px;line-height:1.2;color:var(--cacau);margin:10px 0 6px}
+.card p.desc{color:var(--suave);font-size:14px;margin:0 0 14px}
+.preco{margin-top:auto;border-top:1px solid var(--linha);padding-top:14px;display:flex;flex-direction:column;align-items:stretch;gap:12px}
+.preco .qtd{justify-content:space-between;align-self:flex-start;min-width:140px}
+.preco .pix{font-family:var(--t);font-weight:700;font-size:26px;color:var(--marrom);line-height:1}
+.preco .pix small{font-family:var(--s);font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--suave);margin-left:4px}
+.preco .cartao{font-size:13px;color:var(--suave);margin-top:4px}
+.preco .cartao b{color:var(--cacau)}
+.qtd{display:flex;align-items:center;background:var(--areia);border-radius:999px;padding:4px}
+.qtd button{width:36px;height:36px;border-radius:50%;border:0;background:var(--creme);color:var(--marrom);font:700 22px/1 var(--s);cursor:pointer}
+.qtd button:hover{background:#fff}
+.qtd span{min-width:34px;text-align:center;font-weight:700;font-size:18px}
+.nota-taxa{max-width:940px;margin:18px auto 0;font-size:13px;color:var(--suave);text-align:center}
+.prazo-pedido{text-align:center;margin:-24px 0 32px;font-size:15px;color:var(--suave)}
+.prazo-pedido b{color:var(--morango)}
+.opcao{align-items:flex-start}
+.opcao .info{flex:1}
+.topo-op{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.topo-op .val{white-space:nowrap}
+.opcao .info small{display:block;font-size:13px;color:var(--suave);margin-top:3px;line-height:1.45}
+.opcao input{margin-top:3px}
+.subtotal{font-size:14px;color:var(--suave);min-height:0}
+.subtotal:empty{display:none}
+.subtotal b{color:var(--marrom);font-size:17px}
+.card{border:2px solid transparent;transition:border-color .2s}
+.card.escolhido{border-color:var(--marrom)}
+/* URGÊNCIA */
+.faixa-urgencia{background:#2a160b;color:var(--bege);text-align:center;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:10px 14px;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(204,164,121,.35)}
+.faixa-urgencia b{color:var(--creme);font-weight:700}
+.faixa-urgencia .sep{display:inline-block;margin:0 10px;color:var(--bege);opacity:.7}
+body.fechado .faixa-urgencia{display:none}
+.escassez{text-align:center;margin:-22px auto 6px;font-size:15px;color:var(--suave)}
+.escassez b{color:var(--marrom)}
+.garantia{display:block;margin-top:10px;font-size:13px;font-weight:700;color:var(--bege)}
+/* ESTOQUE */
+.estoque{display:block;text-align:center;margin:6px auto 28px;font-size:14px;font-weight:700;color:var(--morango)}
+.estoque:empty{display:none}
+/* DEPOIMENTOS */
+.depo-sec{background:var(--areia)}
+.depos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;max-width:940px;margin:0 auto}
+.depo{background:#fff;border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(59,31,16,.08)}
+.depo p{font-family:var(--t);font-style:italic;font-size:17px;line-height:1.5;margin:0 0 12px;color:var(--cacau)}
+.depo span{font-size:13px;font-weight:700;color:var(--marrom)}
+.depo .estrelas{color:#c9972f;letter-spacing:2px;font-size:14px;margin-bottom:8px}
+/* FAQ */
+.faq{max-width:720px;margin:0 auto}
+.faq details{background:#fff;border-radius:14px;margin-bottom:10px;box-shadow:0 4px 14px rgba(59,31,16,.06);overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:18px 52px 18px 20px;font-weight:700;color:var(--cacau);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--marrom);font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0;padding:0 20px 18px;color:var(--suave);font-size:15px}
+.insta{display:inline-flex;align-items:center;gap:8px;color:var(--bege);text-decoration:none;font-weight:700;margin:6px 0 10px}
+.insta svg{width:20px;height:20px}
+.kit-val{display:block;font-weight:700;color:var(--marrom);font-size:15px;margin-top:2px}
+.kit-val:empty{display:none}
+.formas{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.formas-tit{width:100%;font-size:13px;color:var(--bege-claro)}
+.forma{display:inline-flex;align-items:center;gap:6px;background:rgba(204,164,121,.14);border:1px solid rgba(204,164,121,.35);color:var(--creme);font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px}
+.forma svg{width:15px;height:15px;color:var(--bege)}
+/* PEDIDO */
+.pedido{background:var(--areia)}
+.pedido-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:28px;align-items:start}
+.bloco{background:var(--creme);border-radius:22px;padding:26px}
+.bloco + .bloco{margin-top:20px}
+.bloco h3{font-size:20px;color:var(--marrom);margin-bottom:14px}
+.opcoes{display:grid;gap:10px}
+.opcao{display:flex;align-items:center;gap:12px;border:2px solid var(--linha);border-radius:14px;padding:14px 16px;cursor:pointer;background:#fff}
+.opcao input{accent-color:var(--marrom);width:18px;height:18px}
+.opcao .nome{flex:1;font-weight:500}
+.opcao .val{font-weight:700;color:var(--marrom)}
+.opcao:has(input:checked){border-color:var(--marrom)}
+label.campo{display:block;font-size:13px;font-weight:700;color:var(--suave);margin-bottom:12px}
+label.campo input,label.campo textarea{display:block;width:100%;margin-top:6px;font:400 16px var(--s);color:var(--cacau);padding:13px 14px;border:2px solid var(--linha);border-radius:12px;background:#fff}
+label.campo input:focus,label.campo textarea:focus{border-color:var(--marrom);outline:none}
+.duas{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+.resumo{position:sticky;top:56px;background:var(--cacau);color:var(--creme);border-radius:22px;padding:26px}
+.resumo h3{color:var(--bege);font-size:20px;margin-bottom:14px}
+.linha-res{display:flex;justify-content:space-between;gap:10px;font-size:15px;padding:6px 0;color:var(--bege-claro)}
+.linha-res b{color:var(--creme);font-weight:500}
+.vazio{color:var(--bege-claro);font-size:15px;margin:0 0 6px}
+.total{border-top:1px solid rgba(204,164,121,.35);margin-top:10px;padding-top:14px}
+.total .pix{display:flex;justify-content:space-between;align-items:baseline}
+.total .pix span{font-size:13px;letter-spacing:.12em;font-weight:700;color:var(--bege)}
+.total .pix b{font-family:var(--t);font-size:34px;color:var(--creme)}
+.parcelas{margin:12px 0 0;padding:12px 14px;background:rgba(204,164,121,.12);border-radius:12px;font-size:14px;color:var(--bege-claro)}
+.parcelas div{display:flex;justify-content:space-between;gap:12px;padding:2px 0}
+.parcelas b{color:var(--creme)}
+.resumo .btn{width:100%;margin-top:18px}
+.nota{font-size:12px;color:var(--bege-claro);margin:12px 0 0;line-height:1.5}
+.erro{background:#fde8ea;color:var(--morango);border-radius:10px;padding:10px 12px;font-size:14px;margin-top:12px;display:none}
+.resumo .erro{background:rgba(168,25,46,.18);color:#ffd6db}
+/* COMO FUNCIONA */
+.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.passo{text-align:center;padding:0 6px}
+.passo .num{width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:var(--marrom);color:var(--creme);display:flex;align-items:center;justify-content:center;font-family:var(--t);font-weight:700;font-size:24px;box-shadow:0 0 0 6px var(--areia)}
+.passo h4{font-family:var(--t);font-size:18px;margin:0 0 6px;color:var(--cacau)}
+.passo p{margin:0;font-size:14px;color:var(--suave)}
+/* RODAPE */
+footer{background:var(--cacau);color:var(--bege-claro);text-align:center;padding:56px 0 40px}
+footer img.slogan{width:180px;margin:0 auto 26px}
+footer img.logo{width:150px;margin:0 auto 18px}
+footer p{font-size:14px;margin:4px 0}
+footer a{color:var(--bege)}
+.encerrado{display:none;background:var(--morango);color:var(--creme);text-align:center;padding:14px 20px;font-weight:700}
+body.fechado .encerrado{display:block}
+/* MOBILE */
+@media (max-width:860px){
+  .hero .wrap{padding-top:104px;padding-bottom:40px}
+  .guirlanda{height:104px;background-size:auto 104px}
+  .cena{margin-top:30px}
+  .hero-foto{aspect-ratio:4/5;border-radius:22px;width:100%}
+  .cena{margin-top:30px}
+  .produtos,.pedido-grid{grid-template-columns:1fr}
+  .produtos{max-width:420px}
+  .card .metade{flex-basis:125px;width:125px;height:250px;background-size:125px 250px}
+  .card .corpo{padding:18px 14px 18px 18px}
+  .passos{grid-template-columns:1fr 1fr;row-gap:30px}
+  .resumo{position:static}
+  section{padding:56px 0}
+}
+@media (max-width:420px){.preco{flex-direction:column;align-items:stretch}.qtd{justify-content:space-between}.duas{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="st" viewBox="0 0 24 24"><path d="M12 0 L14.2 9.8 L24 12 L14.2 14.2 L12 24 L9.8 14.2 L0 12 L9.8 9.8 Z"/></symbol></defs></svg>
+
+<div class="faixa-urgencia" id="faixa">Produção limitada<span class="sep">✦</span>Pedidos até <b id="prazo-faixa">15/12</b></div>
+<div class="encerrado">As encomendas de Natal foram encerradas. Obrigada pelo carinho! 🤎</div>
+
+<header class="hero">
+  <div class="guirlanda" aria-hidden="true"></div>
+  <div class="bokeh" aria-hidden="true"><i style="width:90px;height:90px;left:6%;top:30%;background:#ffb85a"></i><i style="width:60px;height:60px;left:14%;top:62%;background:#a8192e"></i><i style="width:110px;height:110px;right:7%;top:40%;background:#ffcf7a"></i><i style="width:50px;height:50px;right:16%;top:70%;background:#ffb85a"></i><i style="width:70px;height:70px;left:30%;top:18%;background:#cca479"></i><i style="width:80px;height:80px;right:28%;top:22%;background:#a8192e"></i></div>
+  
+  <div class="wrap">
+    <img class="logo-grande" src="assets/logo-bege.png" alt="Pudinzin da Vivi">
+    <div class="kicker">Encomendas de Natal</div>
+    <p>O pudim que vai ser o assunto da ceia e o presente que todo mundo queria ganhar.</p>
+    <div class="cena"><div class="cena"><div class="hero-foto" role="img" aria-label="Pudim tradicional com calda de caramelo"></div></div></div>
+  </div>
+</header>
+
+<main>
+<section id="sabores">
+  <div class="wrap">
+    <div class="titulo-sec"><svg class="azevinho" viewBox="0 0 46 26" aria-hidden="true"><path d="M23 14 C16 4 6 6 2 9 C6 10 7 13 5 16 C10 14 13 18 13 21 C17 17 21 18 23 14Z" fill="#2f5d3a"/><path d="M23 14 C30 4 40 6 44 9 C40 10 39 13 41 16 C36 14 33 18 33 21 C29 17 25 18 23 14Z" fill="#3d7049"/><circle cx="20" cy="15" r="3.6" fill="#a8192e"/><circle cx="26" cy="15" r="3.6" fill="#a8192e"/><circle cx="23" cy="11" r="3.6" fill="#c42a3f"/></svg><div class="kicker">Nossos sabores</div><h2>Escolha o seu pudinzin</h2></div>
+    <p class="escassez">Feitos à mão, em <b>quantidade limitada</b>. Quando acabar, acabou!</p>
+    <span class="estoque" id="estoque" style="margin-top:6px"></span>
+    <div class="produtos" id="produtos"></div>
+    <p class="nota-taxa">* Parcelamento em até 12x no cartão de crédito, com a taxa da operadora, que varia de acordo com o número de parcelas. O valor de cada parcela aparece na tela de pagamento.</p>
+  </div>
+</section>
+
+<section class="pedido" id="pedido">
+  <div class="wrap">
+    <div class="titulo-sec"><svg class="azevinho" viewBox="0 0 46 26" aria-hidden="true"><path d="M23 14 C16 4 6 6 2 9 C6 10 7 13 5 16 C10 14 13 18 13 21 C17 17 21 18 23 14Z" fill="#2f5d3a"/><path d="M23 14 C30 4 40 6 44 9 C40 10 39 13 41 16 C36 14 33 18 33 21 C29 17 25 18 23 14Z" fill="#3d7049"/><circle cx="20" cy="15" r="3.6" fill="#a8192e"/><circle cx="26" cy="15" r="3.6" fill="#a8192e"/><circle cx="23" cy="11" r="3.6" fill="#c42a3f"/></svg><div class="kicker">Finalize seu pedido</div><h2>Quase lá!</h2></div>
+    <p class="prazo-pedido">Pedidos até <b id="prazo-pedido">15/12</b></p>
+    <div class="pedido-grid">
+      <div>
+        <div class="bloco">
+          <h3>Entrega ou retirada</h3>
+          <div class="opcoes" id="entregas"></div>
+        </div>
+        <div class="bloco">
+          <h3>Seus dados</h3>
+          <label class="campo">Nome completo<input id="nome" autocomplete="name" required></label>
+          <label class="campo">WhatsApp (com DDD)<input id="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(21) 9 0000-0000" required></label>
+          <div id="campos-endereco">
+          <div class="duas">
+            <label class="campo">Endereço (rua e número)<input id="endereco" autocomplete="street-address"></label>
+            <label class="campo">Bairro<input id="bairro"></label>
+          </div>
+          <div class="duas">
+            <label class="campo">Complemento<input id="complemento"></label>
+            <label class="campo">Cidade<input id="cidade" value="Niterói" autocomplete="address-level2"></label>
+          </div>
+          </div>
+          <label class="campo">Observações (opcional)<textarea id="obs" rows="3" placeholder="Ex.: Prefiro entrega à tarde."></textarea></label>
+        </div>
+        <div class="bloco">
+          <h3>É para presente? 🎁</h3>
+          <label class="opcao"><input type="checkbox" id="presente"><span class="info"><span class="nome">Sim, é para presente</span><span class="kit-val" id="emb-val"></span><small id="emb-desc"></small></span></label>
+          <div id="presente-campos" style="display:none;margin-top:14px">
+            <label class="campo">Mensagem do cartão<textarea id="mensagem" rows="3" maxlength="300" placeholder="Ex.: Feliz Natal, mãe! Com todo o amor, Ana."></textarea></label>
+            <label class="campo">Para quem é? (opcional)<input id="destinatario" placeholder="Nome de quem vai receber"></label>
+          </div>
+        </div>
+      </div>
+
+      <aside class="resumo" aria-live="polite">
+        <h3>Seu pedido</h3>
+        <div id="itens"></div>
+        <div class="total">
+          <div class="pix"><span>NO PIX</span><b id="total-pix">R$ 0,00</b></div>
+        </div>
+        <div class="formas">
+          <span class="formas-tit">Na próxima tela você escolhe como pagar:</span>
+          <span class="forma"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L22 12 L12 22 L2 12 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12 L12 8 L16 12 L12 16 Z" fill="currentColor"/></svg>Pix</span>
+          <span class="forma"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 10h20" stroke="currentColor" stroke-width="2"/></svg>Cartão de crédito em até 12x</span>
+        </div>
+        <button class="btn btn-bege" id="pagar">Finalize sua compra</button>
+        <span class="garantia">⏳ Seu pudim só fica garantido após o pagamento.</span>
+        <div class="erro" id="erro"></div>
+        <p class="nota">🔒 Pagamento seguro pela InfinitePay. No cartão, o parcelamento tem a taxa da operadora, que varia conforme o número de parcelas. O valor de cada parcela aparece na tela de pagamento.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="titulo-sec"><svg class="azevinho" viewBox="0 0 46 26" aria-hidden="true"><path d="M23 14 C16 4 6 6 2 9 C6 10 7 13 5 16 C10 14 13 18 13 21 C17 17 21 18 23 14Z" fill="#2f5d3a"/><path d="M23 14 C30 4 40 6 44 9 C40 10 39 13 41 16 C36 14 33 18 33 21 C29 17 25 18 23 14Z" fill="#3d7049"/><circle cx="20" cy="15" r="3.6" fill="#a8192e"/><circle cx="26" cy="15" r="3.6" fill="#a8192e"/><circle cx="23" cy="11" r="3.6" fill="#c42a3f"/></svg><div class="kicker">Como funciona</div><h2>Simples assim</h2></div>
+    <div class="passos">
+      <div class="passo"><div class="num">1</div><h4>Escolha</h4><p>Os sabores e a quantidade de pudins.</p></div>
+      <div class="passo"><div class="num">2</div><h4>Pague</h4><p>No Pix ou parcelado no cartão, com segurança.</p></div>
+      <div class="passo"><div class="num">3</div><h4>Pedido confirmado</h4><p>Seu pedido chega automaticamente para a Vivi. Você não precisa fazer mais nada.</p></div>
+      <div class="passo"><div class="num">4</div><h4>Receba</h4><p>Entrega na Região Oceânica dia 23/12 ou retirada em Itaipu dia 24/12.</p></div>
+    </div>
+  </div>
+</section>
+<section id="depoimentos" class="depo-sec" hidden>
+  <div class="wrap">
+    <div class="titulo-sec"><svg class="azevinho" viewBox="0 0 46 26" aria-hidden="true"><path d="M23 14 C16 4 6 6 2 9 C6 10 7 13 5 16 C10 14 13 18 13 21 C17 17 21 18 23 14Z" fill="#2f5d3a"/><path d="M23 14 C30 4 40 6 44 9 C40 10 39 13 41 16 C36 14 33 18 33 21 C29 17 25 18 23 14Z" fill="#3d7049"/><circle cx="20" cy="15" r="3.6" fill="#a8192e"/><circle cx="26" cy="15" r="3.6" fill="#a8192e"/><circle cx="23" cy="11" r="3.6" fill="#c42a3f"/></svg><div class="kicker">Quem já provou</div><h2>O que dizem por aí</h2></div>
+    <div class="depos" id="depos"></div>
+  </div>
+</section>
+
+<section id="faq" class="faq-sec">
+  <div class="wrap">
+    <div class="titulo-sec"><svg class="azevinho" viewBox="0 0 46 26" aria-hidden="true"><path d="M23 14 C16 4 6 6 2 9 C6 10 7 13 5 16 C10 14 13 18 13 21 C17 17 21 18 23 14Z" fill="#2f5d3a"/><path d="M23 14 C30 4 40 6 44 9 C40 10 39 13 41 16 C36 14 33 18 33 21 C29 17 25 18 23 14Z" fill="#3d7049"/><circle cx="20" cy="15" r="3.6" fill="#a8192e"/><circle cx="26" cy="15" r="3.6" fill="#a8192e"/><circle cx="23" cy="11" r="3.6" fill="#c42a3f"/></svg><div class="kicker">Ficou com dúvida?</div><h2>Perguntas frequentes</h2></div>
+    <div class="faq" id="faq-lista"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="feliz-natal">Feliz Natal! 🤎</p>
+  <img class="slogan" src="assets/slogan-fundo-escuro.png" alt="O melhor pudinzin do mundo!">
+  <img class="logo" src="assets/logo-bege.png" alt="Pudinzin da Vivi">
+  <p>Pedidos até <span id="prazo-rodape">15/12</span> · Itaipu · Niterói - RJ</p>
+  <p id="insta-wrap" hidden><a class="insta" id="link-insta" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span id="insta-nome"></span></a></p>
+  <p><a id="link-whats" href="#" target="_blank" rel="noopener">Dúvidas? Fale com a Vivi no WhatsApp</a></p>
+</footer>
+
+<script src="config.js"></script>
+<script>
+(function () {
+  var C = window.PUDINZIN;
+  var qtd = {}; C.PRODUTOS.forEach(function (p) { qtd[p.id] = 0; });
+  var entrega = null;
+  var fechado = Date.now() > new Date(C.PRAZO_FINAL).getTime();
+  var $ = function (id) { return document.getElementById(id); };
+  var brl = function (v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); };
+
+  if (fechado) document.body.classList.add('fechado');
+  $('prazo-rodape').textContent = C.PRAZO_TEXTO;
+  $('prazo-pedido').textContent = C.PRAZO_TEXTO;
+  $('prazo-faixa').textContent = C.PRAZO_TEXTO;
+  // Perguntas frequentes
+  $('faq-lista').innerHTML = C.FAQ.map(function (f) {
+    return '<details><summary>' + f.p + '</summary><p>' + f.r + '</p></details>';
+  }).join('');
+  // Depoimentos
+  if (C.DEPOIMENTOS && C.DEPOIMENTOS.length) {
+    $('depos').innerHTML = C.DEPOIMENTOS.map(function (d) {
+      return '<div class="depo"><div class="estrelas">★★★★★</div><p>“' + d.texto + '”</p><span>' + d.nome + '</span></div>';
+    }).join('');
+    $('depoimentos').hidden = false;
+  }
+  // Instagram
+  if (C.INSTAGRAM) {
+    var ig = C.INSTAGRAM.replace(/^@/, '');
+    $('link-insta').href = 'https://instagram.com/' + ig;
+    $('insta-nome').textContent = '@' + ig;
+    $('insta-wrap').hidden = false;
+  }
+  // Estoque (limite de pudins)
+  var restantes = C.LIMITE_PUDINS;
+  function mostrarEstoque() {
+    if (restantes <= 0) {
+      fechado = true; document.body.classList.add('fechado');
+      document.querySelector('.encerrado').textContent = 'Os pudins de Natal esgotaram! Obrigada pelo carinho 🤎';
+      $('estoque').textContent = 'Esgotado';
+    } else if (restantes <= 10) {
+      $('estoque').textContent = '🔥 Últimas unidades!';
+      $('faixa').innerHTML = 'Últimas unidades<span class="sep">✦</span>Garanta já o seu';
+    } else if (restantes <= 20) {
+      $('estoque').textContent = 'Os pudins de Natal estão acabando!';
+      $('faixa').innerHTML = 'Estão acabando<span class="sep">✦</span>Pedidos até <b>' + C.PRAZO_TEXTO + '</b>';
+    } else {
+      $('estoque').textContent = '';
+    }
+    atualizar();
+  }
+  function consultarEstoque() {
+    if (!C.PLANILHA_URL) return Promise.resolve(restantes);
+    return fetch(C.PLANILHA_URL + '?acao=estoque&t=' + Date.now())
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (typeof d.restantes === 'number') { restantes = d.restantes; mostrarEstoque(); } return restantes; })
+      .catch(function () { return restantes; });
+  }
+  consultarEstoque();
+
+  $('link-whats').href = 'https://wa.me/' + C.WHATSAPP + '?text=' + encodeURIComponent('Oi, Vivi! Tenho uma dúvida sobre as encomendas de Natal 🍮');
+
+  // Cards de produto
+  $('produtos').innerHTML = C.PRODUTOS.map(function (p, i) {
+    var cor = i === 0 ? 'var(--calda-esc)' : 'var(--morango)';
+    return '<article class="card">' +
+      '<div class="corpo"><span class="pill" style="background:' + cor + ';color:var(--creme);align-self:flex-start">' + p.selo + '</span>' +
+      '<h3>' + p.nome + '</h3><p class="desc">' + p.descricao + '</p>' +
+      '<span class="tamanho">' + p.tamanho + '</span>' +
+      '<div class="preco"><div><div class="pix">' + brl(p.preco) + '<small>no Pix</small></div>' +
+      '<div class="cartao">ou <b>parcelado no cartão de crédito</b>*</div></div>' +
+      '<div class="qtd" aria-label="Quantidade de ' + p.nome + '"><button type="button" data-id="' + p.id + '" data-d="-1" aria-label="Diminuir">−</button>' +
+      '<span id="q-' + p.id + '">0</span><button type="button" data-id="' + p.id + '" data-d="1" aria-label="Aumentar">+</button></div>' +
+      '<div class="subtotal" id="sub-' + p.id + '" aria-live="polite"></div></div>' +
+      '</div><div class="metade" style="background-image:url(' + p.foto + ')" role="img" aria-label="' + p.nome + ' cortado ao meio"></div></article>';
+  }).join('');
+
+  document.querySelectorAll('.qtd button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.id;
+      var delta = parseInt(b.dataset.d, 10);
+      if (delta > 0 && totalPudins() >= restantes) {
+        $('estoque').textContent = 'Não temos mais unidades para aumentar a quantidade.';
+        return;
+      }
+      qtd[id] = Math.max(0, Math.min(20, qtd[id] + delta));
+      $('q-' + id).textContent = qtd[id];
+      var prod = C.PRODUTOS.find(function (x) { return x.id === id; });
+      var sub = $('sub-' + id), card = sub.closest('.card');
+      if (qtd[id] > 0) {
+        sub.innerHTML = qtd[id] + (qtd[id] > 1 ? ' pudins' : ' pudim') + ' · <b>' + brl(prod.preco * qtd[id]) + '</b> no Pix';
+        card.classList.add('escolhido');
+      } else { sub.innerHTML = ''; card.classList.remove('escolhido'); }
+      atualizar();
+    });
+  });
+
+  // Entregas
+  $('entregas').innerHTML = C.ENTREGAS.map(function (e) {
+    return '<label class="opcao"><input type="radio" name="entrega" value="' + e.id + '">' +
+      '<span class="info"><span class="topo-op"><span class="nome">' + e.nome + '</span>' +
+      '<span class="val">' + (e.preco ? brl(e.preco) : 'Grátis') + '</span></span><small>' + e.detalhe + '</small></span></label>';
+  }).join('');
+  document.querySelectorAll('input[name=entrega]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      entrega = C.ENTREGAS.find(function (e) { return e.id === r.value; });
+      $('campos-endereco').style.display = entrega.precisaEndereco ? '' : 'none';
+      atualizar();
+    });
+  });
+  // Presente
+  if (C.PRESENTE.embalagemAtiva) {
+    $('emb-val').textContent = '+ ' + brl(C.PRESENTE.embalagemPreco) + ' por pudim';
+    $('emb-desc').innerHTML = C.PRESENTE.embalagemDescricao;
+  } else {
+    $('emb-desc').textContent = 'A Vivi coloca um cartãozinho com a sua mensagem.';
+  }
+  $('presente').addEventListener('change', function () {
+    $('presente-campos').style.display = $('presente').checked ? '' : 'none';
+    atualizar();
+  });
+  ['nome', 'telefone', 'endereco'].forEach(function (id) { $(id).addEventListener('input', atualizar); });
+
+  function totalPudins() { var n = 0; C.PRODUTOS.forEach(function (p) { n += qtd[p.id]; }); return n; }
+  function querEmbalagem() { return C.PRESENTE.embalagemAtiva && $('presente').checked; }
+  function valorEmbalagem() { return querEmbalagem() ? C.PRESENTE.embalagemPreco * totalPudins() : 0; }
+  function totalPix() {
+    var t = 0;
+    C.PRODUTOS.forEach(function (p) { t += p.preco * qtd[p.id]; });
+    if (entrega) t += entrega.preco;
+    t += valorEmbalagem();
+    return t;
+  }
+  function temItens() { return C.PRODUTOS.some(function (p) { return qtd[p.id] > 0; }); }
+  function dadosOk() {
+    return $('nome').value.trim().length > 2 && $('telefone').value.replace(/\D/g, '').length >= 10 &&
+      (!entrega || !entrega.precisaEndereco || $('endereco').value.trim().length > 3);
+  }
+
+  function atualizar() {
+    var html = '';
+    C.PRODUTOS.forEach(function (p) {
+      if (qtd[p.id]) html += '<div class="linha-res"><span>' + qtd[p.id] + 'x ' + p.nome + '</span><b>' + brl(p.preco * qtd[p.id]) + '</b></div>';
+    });
+    if (!html) html = '<p class="vazio">Escolha seus pudins acima 🍮</p>';
+    if (entrega) html += '<div class="linha-res"><span>' + entrega.nome + ' · ' + entrega.data + '</span><b>' + (entrega.preco ? brl(entrega.preco) : 'Grátis') + '</b></div>';
+    if (querEmbalagem() && totalPudins()) html += '<div class="linha-res"><span>' + totalPudins() + 'x ' + C.PRESENTE.embalagemNome + '</span><b>' + brl(valorEmbalagem()) + '</b></div>';
+    $('itens').innerHTML = html;
+    var t = temItens() ? totalPix() : 0;
+    $('total-pix').textContent = brl(t);
+    $('pagar').disabled = fechado;
+    $('pagar').textContent = fechado ? 'Encomendas encerradas' : 'Finalize sua compra';
+  }
+
+  var ENDPOINTS = ['https://api.checkout.infinitepay.io/links', 'https://api.infinitepay.io/invoices/public/checkout/links'];
+  function centavos(v) { return Math.round(v * 100); }
+  function lerCliente() {
+    return {
+      nome: $('nome').value.trim(), telefone: $('telefone').value.trim(),
+      endereco: entrega.precisaEndereco ? $('endereco').value.trim() : '',
+      bairro: entrega.precisaEndereco ? $('bairro').value.trim() : '',
+      complemento: entrega.precisaEndereco ? $('complemento').value.trim() : '',
+      cidade: entrega.precisaEndereco ? $('cidade').value.trim() : '', obs: $('obs').value.trim(),
+      presente: $('presente').checked, embalagem: querEmbalagem(),
+      mensagem: $('presente').checked ? $('mensagem').value.trim() : '',
+      destinatario: $('presente').checked ? $('destinatario').value.trim() : ''
+    };
+  }
+  function mensagemPedido(cliente, numero) {
+    var l = ['Olá, Vivi! 🍮 Quero fazer um pedido de Natal.', '', '*Pedido:* ' + numero];
+    C.PRODUTOS.forEach(function (p) { if (qtd[p.id]) l.push('• ' + qtd[p.id] + 'x ' + p.nome); });
+    l.push('*' + (entrega.precisaEndereco ? 'Entrega' : 'Retirada') + ':* ' + entrega.nome + ', ' + entrega.data + (entrega.preco ? ' (' + brl(entrega.preco) + ')' : ''));
+    l.push('*Total no Pix:* ' + brl(totalPix()));
+    l.push('*Pagamento:* não consegui pagar pelo site, me manda o Pix/link?');
+    l.push('', '*Nome:* ' + cliente.nome, '*WhatsApp:* ' + cliente.telefone);
+    if (entrega.precisaEndereco) l.push('*Endereço:* ' + [cliente.endereco, cliente.complemento, cliente.bairro, cliente.cidade].filter(Boolean).join(', '));
+    if (cliente.presente) {
+      l.push('*Presente:* sim' + (cliente.embalagem ? ' (kit presente: caixa + laço + cartão)' : '') + (cliente.destinatario ? ' — para ' + cliente.destinatario : ''));
+      if (cliente.mensagem) l.push('*Mensagem do cartão:* ' + cliente.mensagem);
+    }
+    if (cliente.obs) l.push('*Observações:* ' + cliente.obs);
+    return 'https://wa.me/' + C.WHATSAPP + '?text=' + encodeURIComponent(l.join('\n'));
+  }
+  function criarLink(payload, i) {
+    i = i || 0;
+    return fetch(ENDPOINTS[i], { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) {
+        return r.text().then(function (t) {
+          var d = {}; try { d = JSON.parse(t); } catch (e) {}
+          var link = d.url || d.link || d.checkout_url || d.payment_url || (d.data && (d.data.url || d.data.link));
+          if (r.ok && link) return link;
+          if (r.status === 404 && i + 1 < ENDPOINTS.length) return criarLink(payload, i + 1);
+          throw new Error('falhou');
+        });
+      }, function (e) {
+        if (i + 1 < ENDPOINTS.length) return criarLink(payload, i + 1);
+        throw e;
+      });
+  }
+
+  function faltando() {
+    if (!temItens()) return { msg: 'Escolha pelo menos um pudim.', foco: 'sabores' };
+    if (!entrega) return { msg: 'Escolha entrega ou retirada.', foco: 'pedido' };
+    if ($('nome').value.trim().length < 3) return { msg: 'Preencha seu nome.', campo: 'nome' };
+    if ($('telefone').value.replace(/\D/g, '').length < 10) return { msg: 'Preencha seu WhatsApp com DDD.', campo: 'telefone' };
+    if (entrega.precisaEndereco && $('endereco').value.trim().length < 4) return { msg: 'Preencha o endereço de entrega.', campo: 'endereco' };
+    return null;
+  }
+
+  // Registra o pedido na planilha da Vivi (status: aguardando pagamento)
+  function salvarNaPlanilha(pedido) {
+    if (!C.PLANILHA_URL) return Promise.resolve();
+    var dados = {
+      acao: 'novo',
+      pedido: {
+        pedido: pedido.pedido, cliente: pedido.cliente, total: pedido.totalPix,
+        qtdTradicional: qtd['tradicional'] || 0, qtdChocolate: qtd['chocolate-branco'] || 0,
+        entregaNome: entrega.nome, entregaData: entrega.data
+      }
+    };
+    var envio = fetch(C.PLANILHA_URL, { method: 'POST', mode: 'no-cors', keepalive: true,
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(dados) }).catch(function () {});
+    var limite = new Promise(function (ok) { setTimeout(ok, 2500); });
+    return Promise.race([envio, limite]);
+  }
+
+  $('pagar').addEventListener('click', function () {
+    var btn = $('pagar'), erro = $('erro');
+    erro.style.display = 'none';
+    var f = faltando();
+    if (f) {
+      erro.textContent = f.msg; erro.style.display = 'block';
+      if (f.campo) { $(f.campo).focus(); $(f.campo).scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      else document.getElementById(f.foco).scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Abrindo o pagamento…';
+    consultarEstoque().then(function (r) {
+      if (totalPudins() > r) {
+        erro.textContent = r > 0 ? 'Não temos essa quantidade disponível. Diminua a quantidade ou fale com a Vivi no WhatsApp.' : 'Os pudins de Natal esgotaram.';
+        erro.style.display = 'block'; atualizar(); return;
+      }
+      iniciarPagamento();
+    });
+  });
+
+  function iniciarPagamento() {
+    var btn = $('pagar'), erro = $('erro');
+    var cliente = lerCliente();
+    var numero = 'PV' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 5).toUpperCase();
+    var items = [];
+    C.PRODUTOS.forEach(function (p) { if (qtd[p.id]) items.push({ description: p.nome, quantity: qtd[p.id], price: centavos(p.preco) }); });
+    if (entrega.preco > 0) items.push({ description: entrega.nome, quantity: 1, price: centavos(entrega.preco) });
+    if (querEmbalagem()) items.push({ description: C.PRESENTE.embalagemNome, quantity: totalPudins(), price: centavos(C.PRESENTE.embalagemPreco) });
+    var base = location.href.split('#')[0].split('?')[0].replace(/[^\/]*$/, '');
+    var payload = { handle: C.INFINITETAG.replace(/^\$/, ''), order_nsu: numero, redirect_url: base + 'obrigado.html', items: items };
+    if (C.PLANILHA_URL) payload.webhook_url = C.PLANILHA_URL;
+    var tel = cliente.telefone.replace(/\D/g, '').replace(/^55/, '');
+    payload.customer = { name: cliente.nome };
+    if (tel.length >= 10) payload.customer.phone_number = '+55' + tel;
+
+    criarLink(payload).then(function (link) {
+      var pedido = { pedido: numero, quantidades: qtd, entrega: entrega.id, cliente: cliente, totalPix: totalPix(), criadoEm: new Date().toISOString() };
+      try { localStorage.setItem('pv-pedido-' + numero, JSON.stringify(pedido)); localStorage.setItem('pv-ultimo', numero); } catch (e) {}
+      return salvarNaPlanilha(pedido).then(function () { window.location.href = link; });
+    }).catch(function () {
+      erro.innerHTML = 'Não conseguimos abrir o pagamento agora. <a href="' + mensagemPedido(cliente, numero) +
+        '" target="_blank" rel="noopener" style="color:inherit;font-weight:700">Toque aqui para enviar seu pedido no WhatsApp da Vivi</a> e ela te manda o pagamento.';
+      erro.style.display = 'block';
+      atualizar();
+    });
+  }
+
+  atualizar();
+})();
+</script>
+</body>
+</html>
