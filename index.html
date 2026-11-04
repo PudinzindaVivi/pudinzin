@@ -474,8 +474,19 @@ body.fechado .encerrado{display:block}
     if (cliente.obs) l.push('*Observações:* ' + cliente.obs);
     return 'https://wa.me/' + C.WHATSAPP + '?text=' + encodeURIComponent(l.join('\n'));
   }
+  // Tenta criar o link pela planilha (com a chave da API: menos campos para o cliente).
+  // Se não der, cria direto na InfinitePay.
+  function criarLinkPelaPlanilha(payload) {
+    if (!C.PLANILHA_URL) return Promise.reject();
+    return fetch(C.PLANILHA_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ acao: 'link', payload: payload }) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (d && d.ok && d.url) return d.url; throw new Error('sem link'); });
+  }
   function criarLink(payload, i) {
-    i = i || 0;
+    if (i === undefined) {
+      return criarLinkPelaPlanilha(payload).catch(function () { return criarLink(payload, 0); });
+    }
     return fetch(ENDPOINTS[i], { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
       .then(function (r) {
         return r.text().then(function (t) {
