@@ -67,12 +67,17 @@
       { p: 'Qual o tamanho do pudim?', r: 'Cada pudim tem 1 kg e serve 8 fatias generosas.' },
       { p: 'Até quando posso encomendar?', r: 'Até 15/12 ou enquanto houver pudins. A produção de Natal é limitada, então quando acabar, acabou!' },
       { p: 'Quando recebo meu pedido?', r: 'Entregas na Região Oceânica de Niterói na quarta-feira, 23/12 (R$ 15,00). Para as demais localidades, a retirada é em Itaipu na quinta-feira, 24/12: você retira ou chama um Uber para buscar.' },
-      { p: 'Posso parcelar?', r: 'Sim. No Pix você paga o valor anunciado. No cartão de crédito dá para parcelar em até 12x, com a taxa da operadora, que varia conforme o número de parcelas.' },
+      { p: 'Como funciona o pagamento?', r: 'Para garantir o seu pedido, você paga um sinal de 20% do valor total aqui no site, no Pix ou no cartão. Os 80% restantes você paga no dia da entrega ou da retirada (inclusive se mandar um Uber buscar).' },
+      { p: 'Posso parcelar o sinal?', r: 'Sim. No cartão de crédito dá para parcelar o sinal em até 12x, com a taxa da operadora, que varia conforme o número de parcelas. No Pix você paga o valor exato do sinal.' },
       { p: 'Posso mandar de presente?', r: 'Pode! Marque a opção de presente no pedido e escreva a mensagem que vai no cartãozinho.' },
       { p: 'Qual a validade do pudim?', r: 'Até 10 dias na geladeira. Os pudins ficam prontos um dia antes da entrega, então chegam fresquinhos para a sua ceia.' },
       { p: 'Como devo conservar o pudim?', r: 'Mantenha na geladeira até a hora de servir.' },
-      { p: 'Como sei que meu pedido foi confirmado?', r: 'Assim que o pagamento é aprovado, aparece a confirmação na tela e a Vivi recebe seu pedido na hora. Qualquer dúvida, é só chamar no WhatsApp.' }
+      { p: 'Como sei que meu pedido foi confirmado?', r: 'Assim que o sinal é aprovado, aparece a confirmação na tela e a Vivi recebe seu pedido na hora. Qualquer dúvida, é só chamar no WhatsApp.' }
     ],
+
+    // Sinal: parte paga no site para garantir o pedido (0.20 = 20%).
+    // O restante é pago no dia da entrega ou da retirada.
+    SINAL: 0.20,
 
     // Parcelamento no cartão (a taxa do parcelamento fica por conta do cliente)
     PARCELAS_MAX: 12

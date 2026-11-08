@@ -96,8 +96,14 @@ p{margin:0 0 6px;color:var(--suave)}
         linhas.push('• ' + nPud + 'x ' + C.PRESENTE.embalagemNome);
         resumoHtml += '<div><span>' + nPud + 'x ' + C.PRESENTE.embalagemNome + '</span><b>' + brl(nPud * C.PRESENTE.embalagemPreco) + '</b></div>';
       }
+      var sinal = pedido.sinal || Math.round(pedido.totalPix * C.SINAL * 100) / 100;
+      var resto = pedido.totalPix - sinal;
       linhas.push('*Total:* ' + brl(pedido.totalPix));
-      resumoHtml += '<div style="border-top:1px solid var(--linha);margin-top:6px;padding-top:8px"><span>Total</span><b>' + brl(pedido.totalPix) + '</b></div>';
+      linhas.push('*Sinal pago (20%):* ' + brl(sinal));
+      linhas.push('*Falta receber na ' + (e && !e.precisaEndereco ? 'retirada' : 'entrega') + ':* ' + brl(resto));
+      resumoHtml += '<div style="border-top:1px solid var(--linha);margin-top:6px;padding-top:8px"><span>Total do pedido</span><b>' + brl(pedido.totalPix) + '</b></div>';
+      resumoHtml += '<div><span>Sinal pago agora (20%)</span><b>' + brl(sinal) + '</b></div>';
+      resumoHtml += '<div><span>Restante, no dia da ' + (e && !e.precisaEndereco ? 'retirada' : 'entrega') + '</span><b>' + brl(resto) + '</b></div>';
     }
     linhas.push('*Pagamento:* ' + status);
     if (comprovante) linhas.push('*Comprovante:* ' + comprovante);
@@ -159,11 +165,11 @@ p{margin:0 0 6px;color:var(--suave)}
   }
   verificar(0).then(function (d) {
     var r = { pago: d.paid === true, metodo: d.capture_method || q.get('capture_method') || '', parcelas: d.installments || 1, valorPago: d.paid_amount ? d.paid_amount / 100 : null };
-    if (r.pago && pedido && r.valorPago !== null && r.valorPago + 0.01 < pedido.totalPix) r.divergente = true;
+    if (r.pago && pedido && r.valorPago !== null && r.valorPago + 0.01 < (pedido.sinal || 0)) r.divergente = true;
     if (r.pago) {
       $('icone').textContent = '✓'; $('icone').classList.add('ok');
       $('titulo').textContent = 'Pagamento aprovado!';
-      $('sub').textContent = 'Obrigada pelo carinho 🤎 Seu pudinzin de Natal está garantido.';
+      $('sub').textContent = 'Sinal recebido! 🤎 Seu pudinzin de Natal está garantido. O restante você paga no dia da entrega ou da retirada.';
       montar(metodoTexto(r) + (r.divergente ? ' ⚠️ valor pago (' + brl(r.valorPago) + ') diferente do pedido' : ''));
     } else {
       $('icone').textContent = '⏳';
