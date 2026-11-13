@@ -23,13 +23,21 @@
 
     // Produtos (preço em reais)
     PRODUTOS: [
-      { id: 'tradicional', nome: 'Pudim Tradicional', preco: 85,
+      { id: 'tradicional', nome: 'Pudim Tradicional', preco: 85, cor: 'var(--calda-esc)',
         descricao: 'Lisinho, sem furinhos, com calda de caramelo dourada e brilhante.',
         foto: 'assets/tradicional-metade.png', selo: 'O clássico',
         tamanho: '1 kg · serve 8 fatias generosas' },
-      { id: 'chocolate-branco', nome: 'Pudim de Chocolate Branco com Geleia de Morango', preco: 95,
+      { id: 'chocolate-branco', nome: 'Pudim de Chocolate Branco com Geleia de Morango', preco: 119, cor: 'var(--morango)',
         descricao: 'Feito com chocolate branco nobre, bem cremoso, e coberto com geleia artesanal de morango.',
         foto: 'assets/chocolate-branco-metade.png', selo: 'Especial de Natal',
+        tamanho: '1 kg · serve 8 fatias generosas' },
+      { id: 'brigadeirao', nome: 'Brigadeirão', preco: 109, cor: 'var(--cacau)',
+        descricao: 'Feito com chocolate nobre, muito cremoso e intenso. O preferido de quem é apaixonado por chocolate.',
+        foto: 'assets/brigadeirao-metade.png', selo: 'Chocolatudo',
+        tamanho: '1 kg · serve 8 fatias generosas' },
+      { id: 'cocada', nome: 'Pudim de Cocada Cremosa', preco: 109, cor: 'var(--marrom)',
+        descricao: 'Cremoso e super levinho, com base de coco e calda com lascas de coco fresco.',
+        foto: 'assets/cocada-metade.png', selo: 'Novidade',
         tamanho: '1 kg · serve 8 fatias generosas' }
     ],
 
@@ -45,6 +53,7 @@
 
     // Opção de presente
     PRESENTE: {
+      mostrar: false,             // true = mostra a opção de presente no site
       // Embalagem de presente: mude 'ativa' para true quando definir o valor
       embalagemAtiva: true,
       embalagemPreco: 10,         // valor POR PUDIM, em reais (provisório)
@@ -69,7 +78,6 @@
       { p: 'Quando recebo meu pedido?', r: 'Entregas na Região Oceânica de Niterói na quarta-feira, 23/12 (R$ 15,00). Para as demais localidades, a retirada é em Itaipu na quinta-feira, 24/12: você retira ou chama um Uber para buscar.' },
       { p: 'Como funciona o pagamento?', r: 'Para garantir o seu pedido, você paga um sinal de 20% do valor total aqui no site, no Pix ou no cartão. Os 80% restantes você paga no dia da entrega ou da retirada (inclusive se mandar um Uber buscar).' },
       { p: 'Posso parcelar o sinal?', r: 'Sim. No cartão de crédito dá para parcelar o sinal em até 12x, com a taxa da operadora, que varia conforme o número de parcelas. No Pix você paga o valor exato do sinal.' },
-      { p: 'Posso mandar de presente?', r: 'Pode! Marque a opção de presente no pedido e escreva a mensagem que vai no cartãozinho.' },
       { p: 'Qual a validade do pudim?', r: 'Até 10 dias na geladeira. Os pudins ficam prontos um dia antes da entrega, então chegam fresquinhos para a sua ceia.' },
       { p: 'Como devo conservar o pudim?', r: 'Mantenha na geladeira até a hora de servir.' },
       { p: 'Como sei que meu pedido foi confirmado?', r: 'Assim que o sinal é aprovado, aparece a confirmação na tela e a Vivi recebe seu pedido na hora. Qualquer dúvida, é só chamar no WhatsApp.' }

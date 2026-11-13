@@ -48,7 +48,7 @@ section{padding:72px 0}
 .card .metade{flex:0 0 160px;width:160px;height:320px;background-size:160px 320px;background-repeat:no-repeat;align-self:center}
 .card .corpo{padding:20px 18px 20px 22px;display:flex;flex-direction:column;flex:1;min-width:0;align-self:stretch}
 .card .tamanho{font-size:13px;font-weight:700;color:var(--marrom);margin:0 0 12px}
-.card h3{font-size:19px;line-height:1.2;color:var(--cacau);margin:10px 0 6px}
+.card h3{font-size:19px;line-height:1.2;color:var(--cacau);margin:0 0 6px}
 .card p.desc{color:var(--suave);font-size:14px;margin:0 0 14px}
 .preco{margin-top:auto;border-top:1px solid var(--linha);padding-top:14px;display:flex;flex-direction:column;align-items:stretch;gap:12px}
 .preco .qtd{justify-content:space-between;align-self:flex-start;min-width:140px}
@@ -228,7 +228,7 @@ body.fechado .encerrado{display:block}
           </div>
           <label class="campo">Observações (opcional)<textarea id="obs" rows="3" placeholder="Ex.: Prefiro entrega à tarde."></textarea></label>
         </div>
-        <div class="bloco">
+        <div class="bloco" id="bloco-presente" hidden>
           <h3>É para presente? 🎁</h3>
           <label class="opcao"><input type="checkbox" id="presente"><span class="info"><span class="nome">Sim, é para presente</span><span class="kit-val" id="emb-val"></span><small id="emb-desc"></small></span></label>
           <div id="presente-campos" style="display:none;margin-top:14px">
@@ -358,9 +358,9 @@ body.fechado .encerrado{display:block}
 
   // Cards de produto
   $('produtos').innerHTML = C.PRODUTOS.map(function (p, i) {
-    var cor = i === 0 ? 'var(--calda-esc)' : 'var(--morango)';
+    var cor = p.cor || 'var(--marrom)';
     return '<article class="card">' +
-      '<div class="corpo"><span class="pill" style="background:' + cor + ';color:var(--creme);align-self:flex-start">' + p.selo + '</span>' +
+      '<div class="corpo">' +
       '<h3>' + p.nome + '</h3><p class="desc">' + p.descricao + '</p>' +
       '<span class="tamanho">' + p.tamanho + '</span>' +
       '<div class="preco"><div><div class="pix">' + brl(p.preco) + '</div>' +
@@ -384,7 +384,7 @@ body.fechado .encerrado{display:block}
       var prod = C.PRODUTOS.find(function (x) { return x.id === id; });
       var sub = $('sub-' + id), card = sub.closest('.card');
       if (qtd[id] > 0) {
-        sub.innerHTML = qtd[id] + (qtd[id] > 1 ? ' pudins' : ' pudim') + ' · <b>' + brl(prod.preco * qtd[id]) + '</b> no Pix';
+        sub.innerHTML = qtd[id] + (qtd[id] > 1 ? ' pudins' : ' pudim') + ' · <b>' + brl(prod.preco * qtd[id]) + '</b>';
         card.classList.add('escolhido');
       } else { sub.innerHTML = ''; card.classList.remove('escolhido'); }
       atualizar();
@@ -404,7 +404,8 @@ body.fechado .encerrado{display:block}
       atualizar();
     });
   });
-  // Presente
+  // Presente (aparece só se PRESENTE.mostrar = true no config.js)
+  if (C.PRESENTE.mostrar) $('bloco-presente').hidden = false;
   if (C.PRESENTE.embalagemAtiva) {
     $('emb-val').textContent = '+ ' + brl(C.PRESENTE.embalagemPreco) + ' por pudim';
     $('emb-desc').innerHTML = C.PRESENTE.embalagemDescricao;
@@ -525,6 +526,7 @@ body.fechado .encerrado{display:block}
       pedido: {
         pedido: pedido.pedido, cliente: pedido.cliente, total: pedido.totalPix, sinal: pedido.sinal,
         qtdTradicional: qtd['tradicional'] || 0, qtdChocolate: qtd['chocolate-branco'] || 0,
+        qtdBrigadeirao: qtd['brigadeirao'] || 0, qtdCocada: qtd['cocada'] || 0,
         entregaNome: entrega.nome, entregaData: entrega.data
       }
     };
