@@ -26,19 +26,19 @@
       { id: 'tradicional', nome: 'Pudim Tradicional', preco: 85, cor: 'var(--calda-esc)',
         descricao: 'Lisinho, sem furinhos, com calda de caramelo dourada e brilhante.',
         foto: 'assets/tradicional-metade.png', selo: 'O clássico',
-        tamanho: '1 kg · serve 8 fatias generosas' },
+        tamanho: '1 kg · serve de 8 a 10 fatias generosas' },
       { id: 'chocolate-branco', nome: 'Pudim de Chocolate Branco com Geleia de Morango', preco: 119, cor: 'var(--morango)',
         descricao: 'Feito com chocolate branco nobre, bem cremoso, e coberto com geleia artesanal de morango.',
         foto: 'assets/chocolate-branco-metade.png', selo: 'Especial de Natal',
-        tamanho: '1 kg · serve 8 fatias generosas' },
+        tamanho: '1 kg · serve de 8 a 10 fatias generosas' },
       { id: 'brigadeirao', nome: 'Brigadeirão', preco: 109, cor: 'var(--cacau)',
         descricao: 'Feito com chocolate nobre, muito cremoso e intenso. O preferido de quem é apaixonado por chocolate.',
         foto: 'assets/brigadeirao-metade.png', selo: 'Chocolatudo',
-        tamanho: '1 kg · serve 8 fatias generosas' },
+        tamanho: '1 kg · serve de 8 a 10 fatias generosas' },
       { id: 'cocada', nome: 'Pudim de Cocada Cremosa', preco: 109, cor: 'var(--marrom)',
         descricao: 'Cremoso e super levinho, com base de coco e calda com lascas de coco fresco.',
         foto: 'assets/cocada-metade.png', selo: 'Novidade',
-        tamanho: '1 kg · serve 8 fatias generosas' }
+        tamanho: '1 kg · serve de 8 a 10 fatias generosas' }
     ],
 
     // Entregas
@@ -73,7 +73,7 @@
 
     // Perguntas frequentes
     FAQ: [
-      { p: 'Qual o tamanho do pudim?', r: 'Cada pudim tem 1 kg e serve 8 fatias generosas.' },
+      { p: 'Qual o tamanho do pudim?', r: 'Cada pudim tem 1 kg e serve de 8 a 10 fatias generosas.' },
       { p: 'Até quando posso encomendar?', r: 'Até 15/12 ou enquanto houver pudins. A produção de Natal é limitada, então quando acabar, acabou!' },
       { p: 'Quando recebo meu pedido?', r: 'Entregas na Região Oceânica de Niterói na quarta-feira, 23/12 (R$ 15,00). Para as demais localidades, a retirada é em Itaipu na quinta-feira, 24/12: você retira ou chama um Uber para buscar.' },
       { p: 'Como funciona o pagamento?', r: 'Para garantir o seu pedido, você paga um sinal de 20% do valor total aqui no site, no Pix ou no cartão. Os 80% restantes você paga no dia da entrega ou da retirada (inclusive se mandar um Uber buscar).' },
