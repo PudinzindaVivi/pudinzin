@@ -215,6 +215,7 @@ body.fechado .encerrado{display:block}
           <h3>Seus dados</h3>
           <label class="campo">Nome completo<input id="nome" autocomplete="name" required></label>
           <label class="campo">WhatsApp (com DDD)<input id="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(21) 9 0000-0000" required></label>
+          <p style="margin:-4px 0 12px;font-size:12.5px;color:#8a6a55">🔒 Usamos seu contato só para falar sobre o seu pedido.</p>
           <div id="campos-endereco">
           <div class="duas">
             <label class="campo">Endereço (rua e número)<input id="endereco" autocomplete="street-address"></label>
@@ -417,6 +418,41 @@ body.fechado .encerrado{display:block}
   });
   ['nome', 'telefone', 'endereco'].forEach(function (id) { $(id).addEventListener('input', atualizar); });
 
+  // Guarda o contato de quem preencheu nome + WhatsApp (mesmo sem finalizar),
+  // para a Vivi poder chamar depois (aba "Interessados" da planilha).
+  var contatoId = '';
+  try { contatoId = sessionStorage.getItem('pv-contato') || ''; } catch (e) {}
+  if (!contatoId) {
+    contatoId = 'C' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 5).toUpperCase();
+    try { sessionStorage.setItem('pv-contato', contatoId); } catch (e) {}
+  }
+  var ultimoContato = '', timerContato = null;
+  function enviarContato() {
+    clearTimeout(timerContato);
+    if (!C.PLANILHA_URL) return;
+    var nome = $('nome').value.trim(), tel = $('telefone').value.trim();
+    if (nome.length < 3 || tel.replace(/\D/g, '').length < 10) return;
+    var c = {
+      id: contatoId, nome: nome, telefone: tel,
+      qtdTradicional: qtd['tradicional'] || 0, qtdChocolate: qtd['chocolate-branco'] || 0,
+      qtdBrigadeirao: qtd['brigadeirao'] || 0, qtdCocada: qtd['cocada'] || 0,
+      entregaNome: entrega ? entrega.nome : '', entregaData: entrega ? entrega.data : ''
+    };
+    var assinatura = JSON.stringify(c);
+    if (assinatura === ultimoContato) return;
+    ultimoContato = assinatura;
+    fetch(C.PLANILHA_URL, { method: 'POST', mode: 'no-cors', keepalive: true,
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ acao: 'contato', contato: c }) }).catch(function () {});
+  }
+  function agendarContato() { clearTimeout(timerContato); timerContato = setTimeout(enviarContato, 2500); }
+  ['nome', 'telefone'].forEach(function (id) {
+    $(id).addEventListener('input', agendarContato);
+    $(id).addEventListener('blur', enviarContato);
+  });
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') enviarContato(); });
+  window.addEventListener('pagehide', enviarContato);
+
   function sinalDe(v) { return Math.round(v * C.SINAL * 100) / 100; }
   function totalPudins() { var n = 0; C.PRODUTOS.forEach(function (p) { n += qtd[p.id]; }); return n; }
   function querEmbalagem() { return C.PRESENTE.embalagemAtiva && $('presente').checked; }
@@ -447,6 +483,7 @@ body.fechado .encerrado{display:block}
     $('total-pix').textContent = brl(t);
     $('total-sinal').textContent = brl(sinalDe(t));
     $('total-restante').textContent = brl(t - sinalDe(t));
+    if (ultimoContato) agendarContato();
     $('pagar').disabled = fechado;
     $('pagar').textContent = fechado ? 'Encomendas encerradas' : (t > 0 ? 'Pagar sinal de ' + brl(sinalDe(t)) : 'Finalize sua compra');
   }
@@ -526,7 +563,7 @@ body.fechado .encerrado{display:block}
         pedido: pedido.pedido, cliente: pedido.cliente, total: pedido.totalPix, sinal: pedido.sinal,
         qtdTradicional: qtd['tradicional'] || 0, qtdChocolate: qtd['chocolate-branco'] || 0,
         qtdBrigadeirao: qtd['brigadeirao'] || 0, qtdCocada: qtd['cocada'] || 0,
-        entregaNome: entrega.nome, entregaData: entrega.data
+        entregaNome: entrega.nome, entregaData: entrega.data, contatoId: contatoId
       }
     };
     var envio = fetch(C.PLANILHA_URL, { method: 'POST', mode: 'no-cors', keepalive: true,
